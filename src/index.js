@@ -7,7 +7,13 @@ const GIPHY_API_KEY = "ufRpW4xp0cl2TyAoBZxc9J6zwQD1uUBm";
 
 const weather_gif = document.getElementById("weather-gif");
 const weather_info = document.getElementById("weather-info-temp");
-console.log(weather_gif);
+// console.log(weather_gif);
+
+const weather_form = document.getElementById("weather-form");
+const weather_form_submit_btn = document.querySelector(
+  "#weather-form form button"
+);
+const weather_form_input = document.querySelector("#weather-form form input");
 
 async function getWeather(location) {
   let response = await fetch(
@@ -16,8 +22,8 @@ async function getWeather(location) {
 
   if (response.status == 200) {
     console.log("Weather data successful!");
-    console.log(response);
-    return response.json();
+    // console.log(response);
+    return response.json(); //This returns a promise
   } else {
     throw new Error(response.status);
   }
@@ -29,29 +35,18 @@ async function getGIF(query, weirdness = 4) {
   );
 
   const gifData = await response.json();
-  console.log(gifData);
-  weather_gif.src = gifData.data.images.original.url;
+  displayGIF(gifData);
 }
 
-const weather_form = document.getElementById("weather-form");
-// console.log(weather_form);
+function displayGIF(GIFData) {
+  weather_gif.src = GIFData.data.images.original.url;
+}
 
-const weather_form_submit_btn = document.querySelector(
-  "#weather-form form button"
-);
-const weather_form_input = document.querySelector("#weather-form form input");
-// console.log(weather_form_submit_btn);
 weather_form_submit_btn.addEventListener("click", (event) => {
   event.preventDefault();
-  // console.log("CHECKING WEATHER");
-  // console.log(weather_form_input.value);
   try {
     getWeather(weather_form_input.value)
       .then((weatherData) => {
-        console.log(weatherData);
-        console.log(weatherData.location.name);
-        console.log(weatherData.current.condition.text);
-
         getGIF(weatherData.current.condition.text).then(() => {
           weather_info.innerText = `It is currently ${weatherData.current.condition.text} in ${weatherData.location.name}`;
         });
