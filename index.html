@@ -7,7 +7,26 @@
   </head>
   <body>
     <header></header>
-    <div id="weather-app"></div>
+
+    <div id="weather-form">
+      <form>
+        <label for="weather-input" id="weather-label"></label>
+        <input
+          type="text"
+          name="weather-input"
+          required
+          placeholder="Current Location"
+          value="Singapore"
+        />
+        <button type="submit">Check Weather</button>
+      </form>
+    </div>
+    <div id="weather-app">
+      <img id="weather-gif"></img>
+      <div id="weather-info-container">
+        <p id="weather-info-temp">Start by searching for a city!</p>
+      </div>
+    </div>
   </body>
   <script src="bundle.js"></script>
 </html>
