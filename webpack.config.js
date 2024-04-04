@@ -6,6 +6,8 @@ module.exports = {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
   },
+  mode: "development",
+  devtool: "inline-source-map", //This is for debugging
   module: {
     rules: [
       {
